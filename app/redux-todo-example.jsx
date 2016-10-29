@@ -23,11 +23,18 @@ var currentState = store.getState();
 
 console.log(currentState);
 
-var changeSearchText = {
-  type: 'CHANGE_SEARCH_TEXT',
-  searchText: 'New text'
-};
+// var changeSearchText = {
+//   type: 'CHANGE_SEARCH_TEXT',
+//   searchText: 'New text'
+// };
 
-store.dispatch(changeSearchText);
+function changeSearchText(text){
+  return {
+      type: 'CHANGE_SEARCH_TEXT',
+      searchText: text
+  }
+}
+
+store.dispatch(changeSearchText('Text changed in function'));
 
 console.log(store.getState());
