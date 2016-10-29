@@ -1,0 +1,1 @@
+Application to test redux features in React
