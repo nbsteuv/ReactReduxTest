@@ -30,6 +30,11 @@ var reducer = (state = stateDefault, action) => {
           }
         ]
       };
+    case 'DELETE_HOBBY':
+      return {
+        ...state,
+        hobbies: state.hobbies.filter((hobby) =>  hobby.id !== action.id)
+      };
     default:
       return state;
   };
@@ -65,8 +70,14 @@ store.dispatch(action);
 store.dispatch({
   type: 'ADD_HOBBY',
   hobby: 'Running'
-})
+});
 
-// unsubscribe();
-action.name = 'Jeff';
-store.dispatch(action);
+store.dispatch({
+  type: 'ADD_HOBBY',
+  hobby: 'Swimming'
+});
+
+store.dispatch({
+  type: 'DELETE_HOBBY',
+  id: 1
+})
