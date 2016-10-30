@@ -19,6 +19,12 @@ var reducer = (state = {name: 'Anonymous'}, action) => {
 
 var store = redux.createStore(reducer);
 
+//Subscribe to changes
+store.subscribe(() => {
+  var state = store.getState();
+  console.log('Name is', state.name);
+});
+
 var currentState = store.getState();
 
 console.log('Current state', currentState);
@@ -32,4 +38,5 @@ var action = {
 //Dispatch action to store--must include in reducer
 store.dispatch(action);
 
-console.log('Name should be Nick', store.getState());
+action.name = 'Jeff';
+store.dispatch(action);
