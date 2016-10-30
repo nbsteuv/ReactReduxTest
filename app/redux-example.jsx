@@ -17,12 +17,16 @@ var reducer = (state = {name: 'Anonymous'}, action) => {
   return state;
 };
 
-var store = redux.createStore(reducer);
+var store = redux.createStore(reducer, redux.compose(
+  //f => f takes argument f and returns it, keeping system from stopping
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+));
 
 //Subscribe to changes
 var unsubscribe = store.subscribe(() => {
   var state = store.getState();
   console.log('Name is', state.name);
+  document.getElementById('app').innerHTML = state.name;
 });
 
 var currentState = store.getState();
@@ -38,6 +42,6 @@ var action = {
 //Dispatch action to store--must include in reducer
 store.dispatch(action);
 
-unsubscribe();
+// unsubscribe();
 action.name = 'Jeff';
 store.dispatch(action);
