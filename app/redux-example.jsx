@@ -1,7 +1,14 @@
 var redux = require('redux');
 
+var stateDefault = {
+  name: 'Anonymous',
+  hobbies: []
+};
+
+var nextHobbyId = 1;
+
 //Reducer with ES6 default for state
-var reducer = (state = {name: 'Anonymous'}, action) => {
+var reducer = (state = stateDefault, action) => {
   //ES5 way to set default:
   // state = state || {name: 'Anonymous'};
   console.log('New action', action);
@@ -10,6 +17,18 @@ var reducer = (state = {name: 'Anonymous'}, action) => {
       return {
         ...state,
         name: action.name
+      };
+    case 'ADD_HOBBY':
+      return {
+        ...state,
+        hobbies: [
+          ...state.hobbies,
+          {
+            //++ after property adds one after setting current to id. Before would add one first
+            id: nextHobbyId++,
+            hobby: action.hobby
+          }
+        ]
       };
     default:
       return state;
@@ -27,6 +46,7 @@ var unsubscribe = store.subscribe(() => {
   var state = store.getState();
   console.log('Name is', state.name);
   document.getElementById('app').innerHTML = state.name;
+  console.log('New state', store.getState());
 });
 
 var currentState = store.getState();
@@ -41,6 +61,11 @@ var action = {
 
 //Dispatch action to store--must include in reducer
 store.dispatch(action);
+
+store.dispatch({
+  type: 'ADD_HOBBY',
+  hobby: 'Running'
+})
 
 // unsubscribe();
 action.name = 'Jeff';
