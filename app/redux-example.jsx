@@ -20,7 +20,7 @@ var reducer = (state = {name: 'Anonymous'}, action) => {
 var store = redux.createStore(reducer);
 
 //Subscribe to changes
-store.subscribe(() => {
+var unsubscribe = store.subscribe(() => {
   var state = store.getState();
   console.log('Name is', state.name);
 });
@@ -38,5 +38,6 @@ var action = {
 //Dispatch action to store--must include in reducer
 store.dispatch(action);
 
+unsubscribe();
 action.name = 'Jeff';
 store.dispatch(action);
