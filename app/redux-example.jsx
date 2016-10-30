@@ -7,39 +7,37 @@ var stateDefault = {
 
 var nextHobbyId = 1;
 
-//Reducer with ES6 default for state
-var reducer = (state = stateDefault, action) => {
-  //ES5 way to set default:
-  // state = state || {name: 'Anonymous'};
-  console.log('New action', action);
+var nameReducer = (state = '', action) => {
   switch(action.type){
     case 'CHANGE_NAME':
-      return {
-        ...state,
-        name: action.name
-      };
-    case 'ADD_HOBBY':
-      return {
-        ...state,
-        hobbies: [
-          ...state.hobbies,
-          {
-            //++ after property adds one after setting current to id. Before would add one first
-            id: nextHobbyId++,
-            hobby: action.hobby
-          }
-        ]
-      };
-    case 'DELETE_HOBBY':
-      return {
-        ...state,
-        hobbies: state.hobbies.filter((hobby) =>  hobby.id !== action.id)
-      };
+      return action.name;
     default:
       return state;
-  };
-  return state;
+  }
 };
+
+var hobbyReducer = (state = [], action) => {
+  switch(action.type){
+    case 'ADD_HOBBY':
+    return [
+      ...state,
+      {
+        id: nextHobbyId++,
+        hobby: action.hobby
+      }
+    ];
+    case 'DELETE_HOBBY':
+    return state.filter((hobby) => hobby.id !== action.id)
+    default:
+      return state;
+  }
+};
+
+//Redux method combineReducers gets argument of properties and the reducers that handle them
+var reducer = redux.combineReducers({
+  name: nameReducer,
+  hobbies: hobbyReducer
+});
 
 var store = redux.createStore(reducer, redux.compose(
   //f => f takes argument f and returns it, keeping system from stopping
