@@ -14,7 +14,7 @@ var changeName = (name) => {
   return {
     type: 'CHANGE_NAME',
     name
-  }
+  };
 };
 
 var nextHobbyId = 1;
@@ -33,6 +33,20 @@ var hobbyReducer = (state = [], action) => {
     default:
       return state;
   }
+};
+
+var addHobby = (hobby) => {
+  return {
+    type: 'ADD_HOBBY',
+    hobby
+  };
+};
+
+var deleteHobby = (id) => {
+  return {
+    type: 'DELETE_HOBBY',
+    id
+  };
 };
 
 //Redux method combineReducers gets argument of properties and the reducers that handle them
@@ -58,25 +72,10 @@ var currentState = store.getState();
 
 console.log('Current state', currentState);
 
-//Type property of action is the only required property
-var action = {
-  type: 'CHANGE_NAME',
-  name: 'Nick'
-};
-
 store.dispatch(changeName('Nicholas'));
 
-store.dispatch({
-  type: 'ADD_HOBBY',
-  hobby: 'Running'
-});
+store.dispatch(addHobby('Running'));
 
-store.dispatch({
-  type: 'ADD_HOBBY',
-  hobby: 'Swimming'
-});
+store.dispatch(addHobby('Swimming'));
 
-store.dispatch({
-  type: 'DELETE_HOBBY',
-  id: 1
-})
+store.dispatch(deleteHobby(1));
