@@ -9,6 +9,14 @@ var nameReducer = (state = '', action) => {
   }
 };
 
+//In ES6, properties set to variables of same name can be written as below
+var changeName = (name) => {
+  return {
+    type: 'CHANGE_NAME',
+    name
+  }
+};
+
 var nextHobbyId = 1;
 var hobbyReducer = (state = [], action) => {
   switch(action.type){
@@ -56,8 +64,7 @@ var action = {
   name: 'Nick'
 };
 
-//Dispatch action to store--must include in reducer
-store.dispatch(action);
+store.dispatch(changeName('Nicholas'));
 
 store.dispatch({
   type: 'ADD_HOBBY',
