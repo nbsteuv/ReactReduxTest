@@ -1,5 +1,4 @@
 var redux = require('redux');
-var axios = require('axios');
 
 
 var actions = require('./actions/index');
