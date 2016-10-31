@@ -2,7 +2,7 @@ var redux = require('redux');
 //Thunk allows redux to work with actions that are not objects
 var thunk = require('redux-thunk').default;
 
-var {nameReducer, hobbyRecuer, mapReducer} = require('./../reducers/index');
+var {nameReducer, hobbyReducer, mapReducer} = require('./../reducers/index');
 
 export var configure = () => {
   var reducer = redux.combineReducers({
