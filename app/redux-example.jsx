@@ -29,4 +29,4 @@ store.dispatch(actions.addHobby('Swimming'));
 
 store.dispatch(actions.deleteHobby(1));
 
-actions.fetchLocation();
+store.dispatch(actions.fetchLocation());

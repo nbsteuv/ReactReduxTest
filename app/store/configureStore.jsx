@@ -1,4 +1,7 @@
 var redux = require('redux');
+//Thunk allows redux to work with actions that are not objects
+var thunk = require('redux-thunk').default;
+
 var {nameReducer, hobbyRecuer, mapReducer} = require('./../reducers/index');
 
 export var configure = () => {
@@ -9,6 +12,7 @@ export var configure = () => {
   });
 
   var store = redux.createStore(reducer, redux.compose(
+    redux.applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 
