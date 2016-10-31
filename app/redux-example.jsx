@@ -1,12 +1,5 @@
 var redux = require('redux');
 
-var stateDefault = {
-  name: 'Anonymous',
-  hobbies: []
-};
-
-var nextHobbyId = 1;
-
 var nameReducer = (state = '', action) => {
   switch(action.type){
     case 'CHANGE_NAME':
@@ -16,6 +9,7 @@ var nameReducer = (state = '', action) => {
   }
 };
 
+var nextHobbyId = 1;
 var hobbyReducer = (state = [], action) => {
   switch(action.type){
     case 'ADD_HOBBY':
